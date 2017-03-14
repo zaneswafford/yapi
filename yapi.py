@@ -25,6 +25,19 @@ class YoutubeAPI:
         video = manager.api_request(api_url, params)
         return video
 
+
+    def get_video_list_info(self, video_ids):
+        api_url = manager.get_api('videos')
+        video_ids_string = ', '.join(video_ids)
+        params = {
+            'part': 'id, snippet, contentDetails, player, statistics, status',
+            'id': video_ids_string
+        }
+
+        videos = manager.api_request(api_url, params)
+        return videos
+
+
     def general_search(self, keyword, max_results=10):
         api_url = manager.get_api('search')
         params = {
